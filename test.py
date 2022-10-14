@@ -63,7 +63,8 @@ while r1 <= 4207:
         sleep(2)
         driver.find_element_by_xpath('//a[@title="指令查詢"]').click()
         sleep(2)
-        driver.find_element_by_id('ysearchinput0').send_keys('"博士".ty and ("社會服務學門" or "社會及行為科學學門").sglv1')
+        driver.find_element_by_id('ysearchinput0').send_keys('"碩士".ty and "葉慶隆".ad')
+    #      driver.find_element_by_id('ysearchinput0').send_keys('"博士".ty and ("社會服務學門" or "社會及行為科學學門").sglv1')
         sleep(0.5)
         driver.find_element_by_id('gs32search').click()
         sleep(2)
@@ -71,8 +72,8 @@ while r1 <= 4207:
         driver.close()
         headers={'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/83.0.4103.97 Safari/537.36',
                  'Cookie': 'ccd={}'.format(cookie)}
-        
-        payload = {'qs0': '"博士".ty and ("社會服務學門" or "社會及行為科學學門").sglv1',
+        payload = {'qs0': '"碩士".ty and "葉慶隆".ad',
+#        payload = {'qs0': '"博士".ty and ("社會服務學門" or "社會及行為科學學門").sglv1',
                    'qf0': '_hist_',
                    'gs32search.x': '27',
                    'gs32search.y': '9',
@@ -87,3 +88,17 @@ while r1 <= 4207:
         
         rs = requests.session()
         res = rs.post('https://ndltd.ncl.edu.tw/cgi-bin/gs32/gsweb.cgi/ccd={}/search'.format(cookie),data=payload, headers=headers)
+        #res2 = rs.get('https://ndltd.ncl.edu.tw/cgi-bin/gs32/gsweb.cgi/ccd={}/record?r1={}&h1=1'.format(cookie, r1))
+        
+df = pd.concat(df, ignore_index=True)
+print(df.shape)
+df
+
+#df.info()
+
+#df.to_pickle('./博碩士論文.pickle')
+#df.to_excel('./博碩士論文.xlsx')
+
+#tmp = df2.groupby(['校院名稱','系所名稱','學類','學門']).size().reset_index()
+#tmp.columns = ['學類', '學門', '校院名稱', '系所名稱', '則數']
+#tmp.to_excel('校系學門學類.xlsx')
